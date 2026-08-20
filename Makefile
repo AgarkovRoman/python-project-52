@@ -1,17 +1,17 @@
 install:
-	uv pip install --system -r pyproject.toml
+	uv sync --no-dev
 
 build:
 	./build.sh
 
 migrate:
-	python3 manage.py migrate
+	uv run python manage.py migrate
 
 collectstatic:
-	python3 manage.py collectstatic --noinput
+	uv run python manage.py collectstatic --noinput
 
 render-start:
-	gunicorn task_manager.wsgi
+	uv run gunicorn task_manager.wsgi
 
 # --- local development helpers (run against the local uv virtualenv) ---
 
