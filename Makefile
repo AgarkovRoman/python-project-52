@@ -5,10 +5,10 @@ build:
 	./build.sh
 
 migrate:
-	python manage.py migrate
+	python3 manage.py migrate
 
 collectstatic:
-	python manage.py collectstatic --noinput
+	python3 manage.py collectstatic --noinput
 
 render-start:
 	gunicorn task_manager.wsgi
