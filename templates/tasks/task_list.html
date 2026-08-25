@@ -8,6 +8,26 @@
             Создать задачу
         </a>
     </div>
+    <form method="get" class="mb-6 flex flex-wrap items-end gap-4 rounded-lg bg-white p-4 shadow-sm">
+        {% for field in filter.form %}
+            <div>
+                {% if field.name == 'self_tasks' %}
+                    <label class="flex items-center gap-2 text-sm font-medium text-slate-700">
+                        {{ field }}
+                        {{ field.label }}
+                    </label>
+                {% else %}
+                    <label for="{{ field.id_for_label }}" class="mb-1 block text-sm font-medium text-slate-700">
+                        {{ field.label }}
+                    </label>
+                    {{ field }}
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="rounded-md bg-slate-800 px-4 py-2 text-sm font-medium text-white hover:bg-slate-700">
+            Показать
+        </button>
+    </form>
     <div class="overflow-x-auto rounded-lg bg-white shadow-sm">
         <table class="min-w-full divide-y divide-gray-200 text-left text-sm">
             <thead class="bg-gray-50 text-gray-500">

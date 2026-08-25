@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
 
+from labels.models import Label
 from statuses.models import Status
 from tasks.models import Task
 
@@ -106,3 +107,56 @@ class UserTaskProtectionTests(TestCase):
         response = self.client.post(reverse('users_delete', args=[101]))
         self.assertRedirects(response, reverse('users_list'))
         self.assertTrue(User.objects.filter(pk=101).exists())
+
+
+class TaskFilterTests(TestCase):
+    def setUp(self):
+        self.me = User.objects.create_user(username='filterMe', password=TEST_PASSWORD)
+        self.other = User.objects.create_user(username='filterOther', password=TEST_PASSWORD)
+        self.status_new = Status.objects.create(name='новый-фильтр')
+        self.status_done = Status.objects.create(name='завершен-фильтр')
+        self.label_bug = Label.objects.create(name='баг-фильтр')
+        self.label_feature = Label.objects.create(name='фича-фильтр')
+
+        self.task_mine_new_bug = Task.objects.create(
+            name='Моя новая задача с багом',
+            status=self.status_new,
+            author=self.me,
+            executor=self.other,
+        )
+        self.task_mine_new_bug.labels.add(self.label_bug)
+
+        self.task_others_done_feature = Task.objects.create(
+            name='Чужая завершенная задача с фичей',
+            status=self.status_done,
+            author=self.other,
+            executor=self.me,
+        )
+        self.task_others_done_feature.labels.add(self.label_feature)
+
+        self.client.login(username='filterMe', password=TEST_PASSWORD)
+
+    def test_filter_by_status(self):
+        response = self.client.get(reverse('tasks_list'), {'status': self.status_done.pk})
+        self.assertContains(response, 'Чужая завершенная задача с фичей')
+        self.assertNotContains(response, 'Моя новая задача с багом')
+
+    def test_filter_by_executor(self):
+        response = self.client.get(reverse('tasks_list'), {'executor': self.other.pk})
+        self.assertContains(response, 'Моя новая задача с багом')
+        self.assertNotContains(response, 'Чужая завершенная задача с фичей')
+
+    def test_filter_by_label(self):
+        response = self.client.get(reverse('tasks_list'), {'labels': self.label_feature.pk})
+        self.assertContains(response, 'Чужая завершенная задача с фичей')
+        self.assertNotContains(response, 'Моя новая задача с багом')
+
+    def test_filter_self_tasks(self):
+        response = self.client.get(reverse('tasks_list'), {'self_tasks': 'on'})
+        self.assertContains(response, 'Моя новая задача с багом')
+        self.assertNotContains(response, 'Чужая завершенная задача с фичей')
+
+    def test_no_filter_shows_all_tasks(self):
+        response = self.client.get(reverse('tasks_list'))
+        self.assertContains(response, 'Моя новая задача с багом')
+        self.assertContains(response, 'Чужая завершенная задача с фичей')
