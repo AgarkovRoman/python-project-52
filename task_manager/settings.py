@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'django_tailwind_cli',
     'users',
     'statuses',
+    'labels',
+    'tasks',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,39 @@
+{% extends 'task_manager/base.html' %}
+
+{% block content %}
+    <div class="mx-auto max-w-2xl rounded-lg bg-white p-8 shadow-sm">
+        <h1 class="mb-6 text-2xl font-bold text-slate-800">{{ task.name }}</h1>
+        <dl class="space-y-4 text-sm">
+            <div>
+                <dt class="font-medium text-slate-500">Описание</dt>
+                <dd class="mt-1 whitespace-pre-line text-slate-800">{{ task.description }}</dd>
+            </div>
+            <div>
+                <dt class="font-medium text-slate-500">Статус</dt>
+                <dd class="mt-1 text-slate-800">{{ task.status }}</dd>
+            </div>
+            <div>
+                <dt class="font-medium text-slate-500">Автор</dt>
+                <dd class="mt-1 text-slate-800">{{ task.author }}</dd>
+            </div>
+            <div>
+                <dt class="font-medium text-slate-500">Исполнитель</dt>
+                <dd class="mt-1 text-slate-800">{{ task.executor|default:'—' }}</dd>
+            </div>
+            <div>
+                <dt class="font-medium text-slate-500">Метки</dt>
+                <dd class="mt-1 text-slate-800">
+                    {% for label in task.labels.all %}
+                        {{ label.name }}{% if not forloop.last %}, {% endif %}
+                    {% empty %}
+                        —
+                    {% endfor %}
+                </dd>
+            </div>
+            <div>
+                <dt class="font-medium text-slate-500">Дата создания</dt>
+                <dd class="mt-1 text-slate-800">{{ task.created_at|date:"d.m.Y H:i" }}</dd>
+            </div>
+        </dl>
+    </div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'task_manager/base.html' %}
+
+{% block content %}
+    <div class="mb-4 flex items-center justify-between">
+        <h1 class="text-2xl font-bold text-slate-800">Задачи</h1>
+        <a href="{% url 'tasks_create' %}"
+           class="rounded-md bg-slate-800 px-4 py-2 text-sm font-medium text-white hover:bg-slate-700">
+            Создать задачу
+        </a>
+    </div>
+    <div class="overflow-x-auto rounded-lg bg-white shadow-sm">
+        <table class="min-w-full divide-y divide-gray-200 text-left text-sm">
+            <thead class="bg-gray-50 text-gray-500">
+                <tr>
+                    <th class="px-4 py-3 font-medium">ID</th>
+                    <th class="px-4 py-3 font-medium">Имя</th>
+                    <th class="px-4 py-3 font-medium">Статус</th>
+                    <th class="px-4 py-3 font-medium">Автор</th>
+                    <th class="px-4 py-3 font-medium">Исполнитель</th>
+                    <th class="px-4 py-3 font-medium">Дата создания</th>
+                    <th class="px-4 py-3 font-medium"></th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                {% for task in tasks %}
+                    <tr>
+                        <td class="px-4 py-3">{{ task.pk }}</td>
+                        <td class="px-4 py-3">{{ task.name }}</td>
+                        <td class="px-4 py-3">{{ task.status }}</td>
+                        <td class="px-4 py-3">{{ task.author }}</td>
+                        <td class="px-4 py-3">{{ task.executor|default:'' }}</td>
+                        <td class="px-4 py-3">{{ task.created_at|date:"d.m.Y H:i" }}</td>
+                        <td class="px-4 py-3 text-right whitespace-nowrap">
+                            <a href="{% url 'tasks_detail' task.pk %}" class="text-slate-600 hover:text-slate-900">Показать</a>
+                            <a href="{% url 'tasks_update' task.pk %}" class="ml-3 text-slate-600 hover:text-slate-900">Изменить</a>
+                            <a href="{% url 'tasks_delete' task.pk %}" class="ml-3 text-red-600 hover:text-red-800">Удалить</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

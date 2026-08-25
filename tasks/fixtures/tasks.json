@@ -1,0 +1,46 @@
+[
+    {
+        "model": "auth.user",
+        "pk": 101,
+        "fields": {
+            "password": "pbkdf2_sha256$1000000$NYueKAEpU69nTNERilZsfX$+wngRro3S5aU/Y6jR7e7UAQzSv0ggsURwTb5K8OvY9w=",
+            "username": "taskAuthor",
+            "first_name": "Автор",
+            "last_name": "Тестовый",
+            "is_staff": false,
+            "is_active": true
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 102,
+        "fields": {
+            "password": "pbkdf2_sha256$1000000$NYueKAEpU69nTNERilZsfX$+wngRro3S5aU/Y6jR7e7UAQzSv0ggsURwTb5K8OvY9w=",
+            "username": "otherUser",
+            "first_name": "Другой",
+            "last_name": "Пользователь",
+            "is_staff": false,
+            "is_active": true
+        }
+    },
+    {
+        "model": "statuses.status",
+        "pk": 201,
+        "fields": {
+            "name": "новый",
+            "created_at": "2026-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "tasks.task",
+        "pk": 301,
+        "fields": {
+            "name": "Тестовая задача",
+            "description": "Описание тестовой задачи",
+            "status": 201,
+            "author": 101,
+            "executor": null,
+            "created_at": "2026-01-01T00:00:00Z"
+        }
+    }
+]
