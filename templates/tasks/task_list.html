@@ -37,8 +37,8 @@
                         <td class="px-4 py-3">{{ task.pk }}</td>
                         <td class="px-4 py-3">{{ task.name }}</td>
                         <td class="px-4 py-3">{{ task.status }}</td>
-                        <td class="px-4 py-3">{{ task.author }}</td>
-                        <td class="px-4 py-3">{{ task.executor|default:'' }}</td>
+                        <td class="px-4 py-3">{{ task.author.get_full_name|default:task.author.username }}</td>
+                        <td class="px-4 py-3">{% if task.executor %}{{ task.executor.get_full_name|default:task.executor.username }}{% endif %}</td>
                         <td class="px-4 py-3">{{ task.created_at|date:"d.m.Y H:i" }}</td>
                         <td class="px-4 py-3 text-right whitespace-nowrap">
                             <a href="{% url 'tasks_detail' task.pk %}" class="text-slate-600 hover:text-slate-900">Показать</a>

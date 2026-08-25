@@ -14,11 +14,11 @@
             </div>
             <div>
                 <dt class="font-medium text-slate-500">Автор</dt>
-                <dd class="mt-1 text-slate-800">{{ task.author }}</dd>
+                <dd class="mt-1 text-slate-800">{{ task.author.get_full_name|default:task.author.username }}</dd>
             </div>
             <div>
                 <dt class="font-medium text-slate-500">Исполнитель</dt>
-                <dd class="mt-1 text-slate-800">{{ task.executor|default:'—' }}</dd>
+                <dd class="mt-1 text-slate-800">{% if task.executor %}{{ task.executor.get_full_name|default:task.executor.username }}{% else %}—{% endif %}</dd>
             </div>
             <div>
                 <dt class="font-medium text-slate-500">Метки</dt>

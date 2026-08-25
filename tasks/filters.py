@@ -4,7 +4,12 @@ from django.contrib.auth.models import User
 
 from labels.models import Label
 from statuses.models import Status
+from tasks.forms import UserChoiceField
 from tasks.models import Task
+
+
+class UserModelChoiceFilter(django_filters.ModelChoiceFilter):
+    field_class = UserChoiceField
 
 
 class TaskFilter(django_filters.FilterSet):
@@ -12,7 +17,7 @@ class TaskFilter(django_filters.FilterSet):
         queryset=Status.objects.all(),
         label='Статус',
     )
-    executor = django_filters.ModelChoiceFilter(
+    executor = UserModelChoiceFilter(
         queryset=User.objects.all(),
         label='Исполнитель',
     )
