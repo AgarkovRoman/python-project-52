@@ -7,6 +7,9 @@ build:
 migrate:
 	uv run python manage.py migrate
 
+tailwind:
+	uv run python manage.py tailwind build
+
 collectstatic:
 	uv run python manage.py collectstatic --noinput
 
@@ -24,4 +27,4 @@ shell:
 lint:
 	uv run flake8
 
-.PHONY: install build migrate collectstatic render-start dev shell lint
+.PHONY: install build migrate tailwind collectstatic render-start dev shell lint

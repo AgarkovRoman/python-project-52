@@ -13,6 +13,7 @@ dependencies = [
     "gunicorn>=23.0.0",
     "psycopg2-binary>=2.9.9",
     "whitenoise>=6.7.0",
+    "django-tailwind-cli>=4.7.0",
 ]
 
 [tool.uv]

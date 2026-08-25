@@ -5,3 +5,5 @@ db.sqlite3
 .env
 staticfiles/
 .idea/
+.django_tailwind_cli/
+assets/css/tailwind.css
