@@ -10,9 +10,7 @@
 <body class="h-full bg-gray-50 text-gray-900 flex flex-col">
     <header class="bg-white border-b border-gray-200">
         <nav class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-4">
-            <a href="{% url 'index' %}" class="text-lg font-semibold text-slate-800 hover:text-slate-600">
-                Менеджер задач
-            </a>
+            <a href="{% url 'index' %}" class="text-lg font-semibold text-slate-800 hover:text-slate-600">Менеджер задач</a>
             <div class="flex items-center gap-4 text-sm font-medium text-slate-600">
                 <a href="{% url 'statuses_list' %}" class="hover:text-slate-900">Статусы</a>
                 <a href="{% url 'labels_list' %}" class="hover:text-slate-900">Метки</a>
@@ -25,9 +23,7 @@
                     </form>
                 {% else %}
                     <a href="{% url 'login' %}" class="hover:text-slate-900">Вход</a>
-                    <a href="{% url 'users_create' %}" class="rounded-md bg-slate-800 px-3 py-2 text-white hover:bg-slate-700">
-                        Регистрация
-                    </a>
+                    <a href="{% url 'users_create' %}" class="rounded-md bg-slate-800 px-3 py-2 text-white hover:bg-slate-700">Регистрация</a>
                 {% endif %}
             </div>
         </nav>

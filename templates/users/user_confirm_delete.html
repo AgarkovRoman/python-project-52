@@ -6,9 +6,7 @@
         <p class="mb-6 text-slate-600">Вы уверены, что хотите удалить {{ object.username }}?</p>
         <form method="post">
             {% csrf_token %}
-            <button type="submit" class="rounded-md bg-red-600 px-4 py-2 text-white hover:bg-red-700">
-                Да, удалить
-            </button>
+            <button type="submit" class="rounded-md bg-red-600 px-4 py-2 text-white hover:bg-red-700">Да, удалить</button>
         </form>
     </div>
 {% endblock %}

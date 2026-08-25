@@ -7,18 +7,14 @@
             {% csrf_token %}
             {% for field in form %}
                 <div class="mb-4">
-                    <label for="{{ field.id_for_label }}" class="mb-1 block text-sm font-medium text-slate-700">
-                        {{ field.label }}
-                    </label>
+                    <label for="{{ field.id_for_label }}" class="mb-1 block text-sm font-medium text-slate-700">{{ field.label }}</label>
                     {{ field }}
                     {% if field.errors %}
                         <div role="alert" class="mt-1 text-sm text-red-600">{{ field.errors|striptags }}</div>
                     {% endif %}
                 </div>
             {% endfor %}
-            <button type="submit" class="w-full rounded-md bg-slate-800 px-4 py-2 text-white hover:bg-slate-700">
-                Войти
-            </button>
+            <button type="submit" class="w-full rounded-md bg-slate-800 px-4 py-2 text-white hover:bg-slate-700">Войти</button>
         </form>
     </div>
 {% endblock %}
