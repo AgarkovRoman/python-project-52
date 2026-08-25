@@ -1,0 +1,32 @@
+{% extends 'task_manager/base.html' %}
+
+{% block content %}
+    <h1 class="mb-4 text-2xl font-bold text-slate-800">Пользователи</h1>
+    <div class="overflow-x-auto rounded-lg bg-white shadow-sm">
+        <table class="min-w-full divide-y divide-gray-200 text-left text-sm">
+            <thead class="bg-gray-50 text-gray-500">
+                <tr>
+                    <th class="px-4 py-3 font-medium">ID</th>
+                    <th class="px-4 py-3 font-medium">Имя пользователя</th>
+                    <th class="px-4 py-3 font-medium">Полное имя</th>
+                    <th class="px-4 py-3 font-medium">Дата создания</th>
+                    <th class="px-4 py-3 font-medium"></th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                {% for user_item in users %}
+                    <tr>
+                        <td class="px-4 py-3">{{ user_item.pk }}</td>
+                        <td class="px-4 py-3">{{ user_item.username }}</td>
+                        <td class="px-4 py-3">{{ user_item.first_name }} {{ user_item.last_name }}</td>
+                        <td class="px-4 py-3">{{ user_item.date_joined|date:"d.m.Y H:i" }}</td>
+                        <td class="px-4 py-3 text-right">
+                            <a href="{% url 'users_update' user_item.pk %}" class="text-slate-600 hover:text-slate-900">Изменить</a>
+                            <a href="{% url 'users_delete' user_item.pk %}" class="ml-3 text-red-600 hover:text-red-800">Удалить</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

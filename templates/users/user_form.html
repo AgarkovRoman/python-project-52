@@ -1,0 +1,24 @@
+{% extends 'task_manager/base.html' %}
+
+{% block content %}
+    <div class="mx-auto max-w-md rounded-lg bg-white p-8 shadow-sm">
+        <h1 class="mb-6 text-2xl font-bold text-slate-800">{{ title|default:'Регистрация' }}</h1>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="mb-4">
+                    <label for="{{ field.id_for_label }}" class="mb-1 block text-sm font-medium text-slate-700">
+                        {{ field.label }}
+                    </label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div role="alert" class="mt-1 text-sm text-red-600">{{ field.errors|striptags }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="w-full rounded-md bg-slate-800 px-4 py-2 text-white hover:bg-slate-700">
+                {{ submit_label|default:'Зарегистрировать' }}
+            </button>
+        </form>
+    </div>
+{% endblock %}

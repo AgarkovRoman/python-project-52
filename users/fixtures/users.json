@@ -1,0 +1,28 @@
+[
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$1000000$NYueKAEpU69nTNERilZsfX$+wngRro3S5aU/Y6jR7e7UAQzSv0ggsURwTb5K8OvY9w=",
+            "is_superuser": false,
+            "username": "testUser1",
+            "first_name": "Иван",
+            "last_name": "Иванов",
+            "is_staff": false,
+            "is_active": true
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 2,
+        "fields": {
+            "password": "pbkdf2_sha256$1000000$NYueKAEpU69nTNERilZsfX$+wngRro3S5aU/Y6jR7e7UAQzSv0ggsURwTb5K8OvY9w=",
+            "is_superuser": false,
+            "username": "testUser2",
+            "first_name": "Пётр",
+            "last_name": "Петров",
+            "is_staff": false,
+            "is_active": true
+        }
+    }
+]

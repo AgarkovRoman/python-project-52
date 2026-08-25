@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_tailwind_cli',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -139,6 +140,10 @@ STORAGES = {
 
 TAILWIND_CLI_VERSION = '4.3.3'
 TAILWIND_CLI_SRC_CSS = 'tailwind_src/source.css'
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

@@ -14,11 +14,18 @@
                 Менеджер задач
             </a>
             <div class="flex items-center gap-4 text-sm font-medium text-slate-600">
-                <a href="#" class="hover:text-slate-900">Пользователи</a>
-                <a href="#" class="hover:text-slate-900">Вход</a>
-                <a href="#" class="rounded-md bg-slate-800 px-3 py-2 text-white hover:bg-slate-700">
-                    Регистрация
-                </a>
+                <a href="{% url 'users_list' %}" class="hover:text-slate-900">Пользователи</a>
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'logout' %}" class="inline">
+                        {% csrf_token %}
+                        <button type="submit" class="hover:text-slate-900">Выход</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" class="hover:text-slate-900">Вход</a>
+                    <a href="{% url 'users_create' %}" class="rounded-md bg-slate-800 px-3 py-2 text-white hover:bg-slate-700">
+                        Регистрация
+                    </a>
+                {% endif %}
             </div>
         </nav>
     </header>
