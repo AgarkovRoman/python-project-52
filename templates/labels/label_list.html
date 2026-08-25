@@ -1,0 +1,36 @@
+{% extends 'task_manager/base.html' %}
+
+{% block content %}
+    <div class="mb-4 flex items-center justify-between">
+        <h1 class="text-2xl font-bold text-slate-800">Метки</h1>
+        <a href="{% url 'labels_create' %}"
+           class="rounded-md bg-slate-800 px-4 py-2 text-sm font-medium text-white hover:bg-slate-700">
+            Создать метку
+        </a>
+    </div>
+    <div class="overflow-x-auto rounded-lg bg-white shadow-sm">
+        <table class="min-w-full divide-y divide-gray-200 text-left text-sm">
+            <thead class="bg-gray-50 text-gray-500">
+                <tr>
+                    <th class="px-4 py-3 font-medium">ID</th>
+                    <th class="px-4 py-3 font-medium">Имя</th>
+                    <th class="px-4 py-3 font-medium">Дата создания</th>
+                    <th class="px-4 py-3 font-medium"></th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                {% for label in labels %}
+                    <tr>
+                        <td class="px-4 py-3">{{ label.pk }}</td>
+                        <td class="px-4 py-3">{{ label.name }}</td>
+                        <td class="px-4 py-3">{{ label.created_at|date:"d.m.Y H:i" }}</td>
+                        <td class="px-4 py-3 text-right">
+                            <a href="{% url 'labels_update' label.pk %}" class="text-slate-600 hover:text-slate-900">Изменить</a>
+                            <a href="{% url 'labels_delete' label.pk %}" class="ml-3 text-red-600 hover:text-red-800">Удалить</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
